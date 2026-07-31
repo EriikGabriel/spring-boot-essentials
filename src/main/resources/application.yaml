@@ -2,7 +2,7 @@ spring:
   application:
     name: spring-boot-essentials
   datasource:
-    url: jdbc:mysql://localhost:3306/gym?createDatabaseIfNotExist=true
+    url: jdbc:mysql://localhost:3306/gym_security?createDatabaseIfNotExist=true
     username: ${DATABASE_USERNAME}
     password: ${DATABASE_PASSWORD}
   jpa:
@@ -12,3 +12,7 @@ spring:
     properties:
       hibernate:
         format_sql: true
+
+jwt:
+  expiration: ${JWT_EXPIRATION:900000} # 15 min
+  key: ${JWT_KEY:PKjD9w7dj9wG5ai9yB2qF6bhTKqoT8ZGkNkd&owrsXXaL6CAc6Qy_sWSyXHl0NaZ2eOgjaD!DZp9YIdAWWnq5Hovbc51sE$x2NiSaRhEzLLVlBE!lEqoHY=gCQ$nHMx&n1zNQjkKkyMNH#qXBmT=2LEMGDCL9zyi#8sERuidRa9=ZKbAqpqCvyk3uiACzGhDvA2A4h--A8u00isqowMOB3bpkH9T5n3SZApAFWe-3E6z3$Ntf7qGvuiPmv#-vzRSXK#GRLY5g7a1H9kGZQUOAZE7jvtsiiSGIQ3mXe7re-rV_iAsKiYDD_RSAn84&O#=LKpEQmnYGF1Yt9bh6Ph_uG3r}

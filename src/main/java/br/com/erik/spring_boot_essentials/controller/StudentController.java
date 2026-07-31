@@ -1,20 +1,17 @@
 package br.com.erik.spring_boot_essentials.controller;
 
-import br.com.erik.spring_boot_essentials.database.model.ExerciseEntity;
 import br.com.erik.spring_boot_essentials.database.model.PhysicalAssessmentEntity;
-import br.com.erik.spring_boot_essentials.dto.ExerciseDto;
 import br.com.erik.spring_boot_essentials.dto.StudentDto;
 import br.com.erik.spring_boot_essentials.exception.BadRequestException;
 import br.com.erik.spring_boot_essentials.exception.NotFoundException;
-import br.com.erik.spring_boot_essentials.service.ExerciseService;
 import br.com.erik.spring_boot_essentials.service.StudentService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
 
 @RestController
 @RequestMapping("/v1/students")
@@ -30,6 +27,7 @@ public class StudentController {
         studentService.createStudent(studentDto);
     }
 
+    @PreAuthorize("#studentId == authentication.principal.id or hasRole('ADMIN')")
     @GetMapping("/{studentId}/assessment")
     @ResponseStatus(HttpStatus.OK)
     public PhysicalAssessmentEntity getPhysicalAssessment(@PathVariable Integer studentId) throws NotFoundException {
